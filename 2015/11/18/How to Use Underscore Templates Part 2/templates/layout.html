@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Underscore.js Templates</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="{{ url_for('static', filename='_template.js') }}"></script>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Trim</th>
+      </thead>
+      <tbody id="appendHere">
+      <tr>
+        <td>Dodge</td>
+        <td>Charger</td>
+        <td>SRT</td>
+      </tr>
+    </tbody>
+    </table>
+
+    <input type="text" id="make" placeholder="make">
+    <input type="text" id="model" placeholder="model">
+    <input type="text" id="trim" placeholder="trim">
+    <button id="clickMe">Add Row</button>
+
+    <script type="text/html" id="template">
+    <tr>
+      <td><%= make %></td>
+      <td><%= model %></td>
+      <td><%= trim %></td>
+    </tr>
+    </script>
+
+  </body>
+</html>
