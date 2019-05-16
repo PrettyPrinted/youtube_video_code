@@ -1,0 +1,17 @@
+    {% extends "structure.html" %}
+    {% block page_content %}
+    <h1>Hello, {{ names.name }}</h1>
+
+    {% if lang %}
+    <p>The language you are using is {{ language }}.</p>
+    {% else %}
+    <p>The framework you are using is {{ framework }}.</p>
+    {% endif %}
+
+    <ul>
+      {% for item in items %}
+        <li>{{ item.text }}</li>
+      {% endfor %}
+
+    </ul>
+    {% endblock %}
