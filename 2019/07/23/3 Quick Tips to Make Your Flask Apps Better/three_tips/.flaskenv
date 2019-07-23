@@ -1,0 +1,2 @@
+FLASK_APP=three_tips
+FLASK_ENV=development
