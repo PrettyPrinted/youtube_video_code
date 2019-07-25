@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Answer Question{% endblock %}
+
+{% block content %}
+      <div class="page-header">
+        <h1>{{ question.question }}</h1>
+      </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="POST" action="{{ url_for('main.answer', question_id=question.id) }}">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="textArea" class="col-lg-2 control-label">Answer</label>
+                    <div class="col-lg-10">
+                      <textarea class="form-control" name="answer" rows="3" id="textArea"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Questions & Answers{% endblock %}
+
+{% block content %}
+      <div class="page-header">
+        <h1>Answered Questions</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="list-group">
+            {% for question in questions %}
+              <a href="{{ url_for('main.question', question_id=question.id) }}" class="list-group-item">
+                <h4 class="list-group-item-heading">{{ question.question }}</h4>
+                <p class="list-group-item-text">Asked by: {{ question.asker.name }}</p>
+                <p class="list-group-item-text">Answered by: {{ question.expert.name }}</p>
+              </a>
+            {% endfor %}
+          </div>
+        </div><!-- /.col-lg-12 -->
+      </div>
+{% endblock %}

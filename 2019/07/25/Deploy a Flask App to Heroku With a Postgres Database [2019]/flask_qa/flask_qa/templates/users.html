@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<div class="page-header">
+        <h1>Users</h1>
+        <h6>Click to promote to expert</h6>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="list-group">
+            {% for user in users %}
+              <a href="{{ url_for('main.promote', user_id=user.id) }}" class="list-group-item {% if user.expert %}active{% endif %}">
+                <h4 class="list-group-item-heading">{{ user.name }}</h4>
+              </a>
+            {% endfor %}
+          </div>
+        </div><!-- /.col-lg-12 -->
+      </div>
+{% endblock %}

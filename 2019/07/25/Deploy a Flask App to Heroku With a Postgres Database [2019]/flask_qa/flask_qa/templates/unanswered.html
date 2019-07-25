@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Unaswered Questions{% endblock %}
+
+{% block content %}
+<div class="page-header">
+        <h1>Questions For You</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="list-group">
+            {% for question in unanswered_questions %}
+              <a href="{{ url_for('main.answer', question_id=question.id) }}" class="list-group-item">
+                <h4 class="list-group-item-heading">{{ question.question }}</h4>
+                <p class="list-group-item-text">Asked by: {{ question.asker.name }}</p>
+              </a>
+            {% endfor %}
+          </div>
+        </div><!-- /.col-lg-12 -->
+      </div>
+{% endblock %}
