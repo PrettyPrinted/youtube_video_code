@@ -1,0 +1,29 @@
+{% extends 'examples/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Something else in block content.</h1>
+    <h1>Hello, World!</h1>
+    <h2>My name is {{ name }}</h2>
+    <h3>The key value is {{ mydict.key1 }}</h3>
+    <h3>The third item in the list is {{ mylist.2 }}</h3>
+    {% if mybool %}
+    <h1>MyBool is True!!!</h1>
+    {% else %}
+    <h1>MyBool is False!!!</h1>
+    {% endif %}
+
+    {% for item in mylist %}
+    <h2>{{ item }}</h2>
+    {% endfor %}
+
+    {% for i in list_of_dictionaries %}
+    <h1>User: {{ i.user }}</h1>
+    {% endfor %}
+
+    {% include 'examples/includethis.html' %}
+
+    <img src="{% static 'examples/img/python.png' %}" />
+
+    <a href="{% url 'profile' name %}">Your Profile</a>
+{% endblock %}
