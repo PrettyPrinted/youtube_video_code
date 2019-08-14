@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Form</title>
+</head>
+<body>
+    <form action="/" method="POST">
+        {{ form.csrf_token }}
+        {{ form.opts }}
+        <ul>
+            {% for error in form.opts.errors %}
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        <input type="submit">
+
+    </form>
+</body>
+</html>
