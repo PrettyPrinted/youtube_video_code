@@ -9,7 +9,6 @@ verify_ssl = true
 django = "*"
 celery = "*"
 redis = "*"
-sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"

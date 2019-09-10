@@ -1,5 +1,5 @@
 """
-WSGI config for django_celery project.
+WSGI config for django_email_celery project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_celery.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_email_celery.settings')
 
 application = get_wsgi_application()
