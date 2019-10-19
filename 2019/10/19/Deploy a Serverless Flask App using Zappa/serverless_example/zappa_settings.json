@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "app.app",
+        "profile_name": "default",
+        "project_name": "serverless-exam",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-18ms4dk3j",
+        "aws_region" : "us-east-1"
+    }
+}
