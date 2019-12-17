@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="My article">
+  <meta name="author" content="Anthony">
+
+  <title>Flask Article!!!</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link href="../vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/freelancer.min.css" rel="stylesheet">
+  <link href="../css/colorful.css" rel="stylesheet">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-70951837-1', 'auto');
+    ga('send', 'pageview');
+  
+  </script>
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <img src="../img/PrettyPrinted_Avatar.png" width="30" height="30" >
+Pretty Printed</a>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#tutorials">Tutorials</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#courses">Courses</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#about">About</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#contact">Contact</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://courses.prettyprinted.com/courses/enrolled">View Your Courses</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <!-- Header -->
+  <header class="masthead bg-primary text-white text-center">
+    <div class="container">
+      <h1 class="text-uppercase mb-0">Flask Article!!!</h1>
+    </div>
+  </header>
+
+  <!-- Header -->
+  <article class="portfolio">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <p><a href="https://bitbucket.com">Get the code for this article here</a></p>  
+      <!-- markdown html goes here -->
+
+      <p>With the introduction of the Flask command line interface, one of the more annoying things you have to do during development is set the environment variables each time you work on your app, namely FLASK_ENV and FLASK_APP. Well, Flask has a way for you to handle those things in a way to where you only have to do it once. And through the same functionality, you can also add other environment variables for your project. In this article, I'll show you how to use python-dotenv to have your environment variables loaded and ready to go every time you run your app.</p>
+
+<p>The one package that makes this all work is <a href="https://github.com/theskumar/python-dotenv">python-dotenv</a></p>
+
+<h2>What We'll Build</h2>
+
+<p>I'm going to demo how this works through a very simple Flask app.</p>
+
+<p>Let's start by creating the directories and empty files we'll need. This is what our project directory will look like:</p>
+
+<pre><code>demo/__init__.py
+demo/settings.py
+.env
+.flaskenv
+run.py
+</code></pre>
+
+<p>This app won't do anything special. It'll just show us what configuration values we have.</p>
+
+<h2>Set Up The Project</h2>
+
+<p>To start, on the command line create a new virtual environment and install flask and python-dotenv. I use pipenv, so I can do this all in one step:</p>
+
+<pre><code>pipenv install flask python-dotenv
+pipenv shell
+</code></pre>
+
+<p>Next, in your demo/__init__.py, we'll need to create the basics of a Flask app, which means importing Flask, creating a application factory function (create_app), and instantiating Flask. Here's the code to do this. </p>
+
+<pre><code># demo/__init__.py
+from flask import Flask 
+
+def create_app():
+    app = Flask(__name__)
+
+    return app
+</code></pre>
+
+<p>If you've worked with Flask at all, then you know exactly how this works.</p>
+
+<p>Next, let's add in a simple route so we know our app actually works.</p>
+
+<pre><code># demo/__init__.py
+from flask import Flask 
+
+def create_app():
+    app = Flask(__name__)
+
+    @app.route('/')
+    def index():
+        return '&lt;h1&gt;Hey There!&lt;/h1&gt;'
+
+    return app
+</code></pre>
+
+<h2>Add FLASK_APP Environment Variable</h2>
+
+<p>Once we've done that, we can use the Flask CLI to run the app. To run the app, use the following command while in the top level directory of your project.</p>
+
+<pre><code>flask run
+</code></pre>
+
+<p>But when we do that, we already get an error!</p>
+
+<pre><code>Error: Could not locate a Flask application. You did not provide the "FLASK_APP" environment variable, and a "wsgi.py" or "app.py" module was not found in the current directory.
+</code></pre>
+
+<p>This is a common error though. Normally, to fix this, we would export the environment variable FLASK_APP to be equal to the name of our app directory like this:</p>
+
+<pre><code>export FLASK_APP=demo
+</code></pre>
+
+<p>But since we're using python-dotenv and we want to avoid the inconvenience of using the command line, we'll have this load automatically by putting it in one of our dot files.</p>
+
+<p>We have two dot files: .env and .flaskenv. We want to use .flaskenv for any Flask CLI configuration commands and use .env for our app configuration. </p>
+
+<p>We'll put our FLASK_APP enviornment variable inside of the .flaskenv file.</p>
+
+<pre><code>#.flaskenv
+FLASK_APP=demo
+</code></pre>
+
+<p>Now that we've added that one line, let's try running the app again.</p>
+
+<pre><code>flask run
+</code></pre>
+
+<p>We should be able to navigate to localhost:5000 or 127.0.0.1:5000 to see the result.</p>
+
+<p><img src="../img/automatically_load_environment_variables_in_flask/1.png" alt="Hey There returned by the index" /></p>
+
+<p>Note the message that appears on the command line that says we aren't in debug mode.</p>
+
+<p><img src="../img/automatically_load_environment_variables_in_flask/2.png" alt="Debug mode: off" /></p>
+
+<p>Now if we were to stop working on this project and come back later, all we would need to do is use flask run and the app will start up without having to specify its location again.</p>
+
+<h2>Flask CLI Options</h2>
+
+<p>Let's say we want to modify some other Flask CLI options, we can put those in our .flaskenv file.</p>
+
+<p>Here are some options:</p>
+
+<ul>
+<li>FLASK_ENV - Controls the environment.</li>
+<li>FLASK_DEBUG - Enables debug mode.</li>
+<li>FLASK_RUN_EXTRA_FILES - A list of files that will be watched by the reloader in addition to the Python modules.</li>
+<li>FLASK_RUN_HOST - The host you want to bind your app to.</li>
+<li>FLASK_RUN_PORT - The port you want to use.</li>
+<li>FLASK_RUN_CERT - A certificate file for so your app can be run with HTTPS.</li>
+<li>FLASK_RUN_KEY - The key file for your cert.</li>
+</ul>
+
+<p>I think the most common ones you'll use are FLASK_ENV, FLASK_RUN_PORT, and FLASK_RUN_EXTRA_FILES, so I'll create examples with them here.</p>
+
+<p>Let's start with FLASK_ENV. By default, it's 'production', which doesn't do anything noticeable. The point of the environment though is so you can decide on what actions to take in your app depending on the environment. For example, you could do something like instantiate the Sentry library for error logging when in production but not development.</p>
+
+<p>If you change your FLASK_ENV to development, the biggest change you'll see is the reloader starts working and your app gets put into debug mode. So let's set that value in our .flaskenv file.</p>
+
+<pre><code>#.flaskenv
+FLASK_APP=demo
+FLASK_ENV=development
+</code></pre>
+
+<p>Let's stop the server and run our app again.</p>
+
+<pre><code>flask run
+</code></pre>
+
+<p><img src="../img/automatically_load_environment_variables_in_flask/3.png" alt="Debug mode: on" /></p>
+
+<p>Notice how the message changes now.</p>
+
+<p>Let's add another one for the port.</p>
+
+<pre><code>#.flaskenv
+FLASK_APP=demo
+FLASK_ENV=development
+FLASK_RUN_PORT=8080
+</code></pre>
+
+<p>After restarting, we'll have to access our on through port 8080:</p>
+
+<p><img src="../img/automatically_load_environment_variables_in_flask/4.png" alt="Same result on port 8080" /></p>
+
+<p>What if we don't want to have to stop and restart our app when we change non-py files in our project? We can use FLASK_RUN_EXTRA_FILES for that. For example, to watch a files called config.yml and README.md </p>
+
+<pre><code>FLASK_RUN_EXTRA_FILES=config.yml:README.md
+</code></pre>
+
+<p>(If you are on windows, you'll need to use a semicolon (;) instead of a colon (:) to separate multiple files)</p>
+
+<h2>Adding in .env</h2>
+
+<p>Now that we've worked with .flaskenv, let's move on to adding variables to the .env file. We'll use these in our app.</p>
+
+<p>One advantage of having .env hold our app environment variables is that we can easily have multiple versions of the file for each place we run our app. For example, we can have one for our local machine, one for a staging environment, and one for production, etc.</p>
+
+<p>Let's add two:</p>
+
+<pre><code>#.env
+SECRET_KEY=topsecretkey
+API_KEY=donotsharethisapikeywithanyone
+</code></pre>
+
+<p>Unlike the values prepended with FLASK_ in our .flaskenv file, the variables in .env aren't meant to work for us automatically. Instead, we need to load them into our app. For that, we'll use the settings.py file.</p>
+
+<p>Inside of settings.py, let's import environ from os so we have access to our environment variables.</p>
+
+<pre><code>#demo/settings.py
+from os import environ 
+</code></pre>
+
+<p>Next, we need to assign those variables to Python variables, and then later we'll load them into our app.</p>
+
+<pre><code>#demo/settings.py
+from os import environ 
+
+SECRET_KEY = environ.get('SECRET_KEY')
+API_KEY = environ.get('API_KEY')
+</code></pre>
+
+<p>We don't need to use the same name for the variable in Python as we do for Python, but I like to do it for consistency purposes.</p>
+
+<p>Next, let's add the configuration from this file in our __init__.py.</p>
+
+<pre><code># demo/__init__.py
+from flask import Flask 
+
+def create_app():
+    app = Flask(__name__)
+
+    app.config.from_pyfile('settings.py')
+
+    @app.route('/')
+    def index():
+        return '&lt;h1&gt;Hey There!&lt;/h1&gt;'
+
+    return app
+</code></pre>
+
+<p>Now our environment variables are ready to use. In the case of SECRET_KEY, normally some Flask extensions we use would pick this up and use it automatically. For the API_KEY, we would need to use this directly in our code.</p>
+
+<p>In our code, we'll simply display the API_KEY in our route. </p>
+
+<pre><code># demo/__init__.py
+from flask import Flask 
+
+def create_app():
+    app = Flask(__name__)
+
+    app.config.from_pyfile('settings.py')
+
+    @app.route('/')
+    def index():
+        return f'API_KEY = { app.config.get("API_KEY") }'
+
+    return app
+</code></pre>
+
+<p><img src="../img/automatically_load_environment_variables_in_flask/5.png" alt="The value of the API_KEY displayed" /></p>
+
+<h2>Running in Production</h2>
+
+<p>If you want to use your .dotenv files in production, you have to make a small change because you won't be using the Flask CLI on a production server.</p>
+
+<p>If you want to see this work, you can install gunicorn so you don't have to use the development server for Flask.</p>
+
+<pre><code>pipenv install gunicorn
+</code></pre>
+
+<p>We need to create a file that gunicorn can find the app object in. For this, we'll create run.py. Let's start with the standard code that doesn't load the environment variables, which is only two lines.</p>
+
+<pre><code>#run.py
+from demo import create_app
+
+app = create_app()
+</code></pre>
+
+<pre><code>gunicorn run:app
+</code></pre>
+
+<p>This should run on port 8000 by default. If you navigate to the index, you'll see the value of API_KEY is None.</p>
+
+<p><img src="../img/automatically_load_environment_variables_in_flask/6.png" alt="API_KEY is None" /></p>
+
+<p>This is because the environment variables are no longer being loaded for us. To load them, we'll have to use the load_dotenv function from python-dotenv. We only need two add two more lines of code:</p>
+
+<pre><code>#run.py
+from demo import create_app
+from dotenv import load_dotenv
+
+load_dotenv('.env') #the path to your .env file (or any other file of environment variables you want to load)
+
+app = create_app()
+</code></pre>
+
+<p>Now if we start the server with gunicorn again we'll see our API_KEY value.</p>
+
+<p><img src="../img/automatically_load_environment_variables_in_flask/7.png" alt="The value of API_KEY appears again" /></p>
+
+<h2>Conclusion</h2>
+
+<p>Now you should understand how python-dotenv can be used in your Flask project to make handling Flask CLI configuration and general app configuration more convenient.</p>
+
+<p>What we covered:</p>
+
+<ul>
+<li>How to use Python-dotenv for Flask development server options.</li>
+<li>How to use Python-dotenv for application specific configuration.</li>
+<li>How to use it in production.</li>
+</ul>
+
+<p>You'll be able to leave and come back to your project without having to re-set your environment variables, and you'll have a flexible way of having multiple configurations depending on where your app is running.</p>
+
+
+</div></div>
+    </div>
+  </article>
+
+  <section class="portfolio">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+
+  <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://prettyprinted.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+</div>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4 mb-5 mb-lg-0">
+          <h4 class="text-uppercase mb-4">Around the Web</h4>
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://youtube.com/c/prettyprintedtutorials">
+                <i class="fab fa-fw fa-youtube"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://github.com/prettyprinted">
+                <i class="fab fa-fw fa-github"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://twitter.com/pretty_printed">
+                <i class="fab fa-fw fa-twitter"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="copyright py-4 text-center text-white">
+    <div class="container">
+      <small>Copyright &copy; PrettyPrinted.com 2019</small>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+  <div class="scroll-to-top d-lg-none position-fixed ">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+  <script id="dsq-count-scr" src="//prettyprinted.disqus.com/count.js" async></script>
+</body>
+
+</html>
