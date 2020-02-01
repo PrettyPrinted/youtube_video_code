@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Form!</title>
+</head>
+<body>
+<h1>Our form will be here!</h1>
+<form method="POST" action="{{ url_for('form') }}">
+    {{ form.csrf_token }}
+    {{ form.username.label }}
+    {{ form.username }}
+    <ul>
+    {% for error in form.username.errors %}
+        <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    </ul>
+    {{ form.password.label }}
+    {{ form.password }}
+    {% for error in form.password.errors %}
+    <ul>
+        <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    </ul>
+    {{ form.recaptcha }}
+    {% for error in form.recaptcha.errors %}
+    <ul>
+        <li style="color:red;">{{ error }}</li>
+    {% endfor %}
+    </ul>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

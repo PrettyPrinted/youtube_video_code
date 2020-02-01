@@ -1,0 +1,49 @@
+{% from "_render_field.html" import render_field, render_radio_fields %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Flask WTF-Example</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    
+    <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container theme-showcase" role="main">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal", method="POST" action="/">
+                {{ form.csrf_token }}
+                <fieldset>
+                  <legend>Flask-WTF Example</legend>
+                  {{ render_field(form.email, placeholder=form.email.label.text) }}
+                  {{ render_field(form.password, placeholder=form.password.label.text) }}
+                  {{ render_field(form.textarea) }}
+                  {{ render_radio_fields(form.radios) }}
+                  {{ render_field(form.selects) }}
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="reset" class="btn btn-default">Cancel</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
