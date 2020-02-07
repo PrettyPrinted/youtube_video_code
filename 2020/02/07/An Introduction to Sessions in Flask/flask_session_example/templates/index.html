@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Site</title>
+    {% if session['mode'] == 'dark' %}
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
+    {% endif %}
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>My Site</h1>
+        <a href="{{ url_for('set_background', mode='light') }}">Light Mode</a>
+        <a href="{{ url_for('set_background', mode='dark') }}">Dark Mode</a>
+    </div>
+</body>
+</html>
