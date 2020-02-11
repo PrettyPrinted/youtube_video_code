@@ -1,0 +1,57 @@
+{% extends "poll/base.html" %}
+
+{% block title %}Vote{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cast Your Vote</h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Which language is easier to learn?</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <hr />
+
+                        <form method="POST">
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="poll" value="option1" required>
+                                        Python
+                                    </label> &nbsp;
+                                    <label>
+                                        <input type="radio" name="poll" value="option2">
+                                        JavaScript
+                                    </label> &nbsp;
+                                    <label>
+                                        <input type="radio" name="poll" value="option3">
+                                        Swift
+                                    </label> &nbsp;
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="id" value="1">
+
+                            <hr />
+
+                            <button type="submit" class="btn btn-info">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "poll/base.html" %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Available Polls</h3>
+            </div>
+                
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Which language is easier to learn?</strong>
+                    <span class="pull-right">
+                        <a href="#" class="btn btn-info btn-xs">Vote</a> &nbsp;
+                        <a href="#" class="btn btn-default btn-xs">View Results</a> &nbsp;
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Which operating system do you use?</strong>
+                    <span class="pull-right">
+                        <a href="#" class="btn btn-info btn-xs">Vote</a> &nbsp;
+                        <a href="#" class="btn btn-default btn-xs">View Results</a> &nbsp;
+                    </span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
