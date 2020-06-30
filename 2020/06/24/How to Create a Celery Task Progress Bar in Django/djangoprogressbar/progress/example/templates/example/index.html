@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Done!</h1>
+    <div class='progress-wrapper'>
+        <div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+      </div>
+      <div id="progress-bar-message">Waiting for progress to start...</div>
+      <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
+      <script>
+      var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
+
+      function customResult(resultElement, result) {
+        $( resultElement ).append(
+           $('<p>').text('Sum of all seconds is ' + result)
+        );
+      }
+
+
+      CeleryProgressBar.initProgressBar(progressUrl, {
+            onResult: customResult,
+      })
+
+    </script>
+</body>
+</html>

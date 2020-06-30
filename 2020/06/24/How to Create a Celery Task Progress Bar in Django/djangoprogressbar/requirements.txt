@@ -1,0 +1,13 @@
+amqp==2.6.0
+asgiref==3.2.10
+billiard==3.6.3.0
+celery==4.4.6
+celery-progress==0.0.10
+Django==3.0.7
+django-celery-results==1.2.1
+future==0.18.2
+kombu==4.6.11
+pytz==2020.1
+redis==3.5.3
+sqlparse==0.3.1
+vine==1.3.0

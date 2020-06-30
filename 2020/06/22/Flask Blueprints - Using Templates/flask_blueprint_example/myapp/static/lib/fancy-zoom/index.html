@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<title>Fancy Zoom</title> 
+	<link rel="stylesheet" href="css/fancyzoom.css" type="text/css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script type="text/javascript" src="src/fancyzoom.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$('section img').fancyZoom({closeOnClick: true});
+		});
+	</script>
+	
+	<style type="text/css" media="screen">
+		section {
+			border: 1px solid red;
+			width: 600px;
+		}
+
+		section img {
+			max-width: 100%;
+		}
+	</style>
+</head>
+<body>
+<div id="wrapper">
+	<header>
+		<h1>Fancy Zoom (jQuery)</h1>
+	</header>
+
+	<section>
+		<img src="http://karlsruhe.boedger.de/wp-content/uploads/2008/05/ansicht-faecherstadt-karlsruhe-aus-dem-turm-des-ka.jpg">
+		<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Karlsruhe_Germany_CastleByNight.jpg/268px-Karlsruhe_Germany_CastleByNight.jpg">
+	</section>
+	
+</body>
+</html>
