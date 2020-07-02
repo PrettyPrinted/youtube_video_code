@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Store</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'narrow-jumbotron.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Store</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1 class="display-3">The Product</h1>
+        <p class="lead">Purchase The Product for only $99.</p>
+        <a href="#" id="buy_now_btn" class="btn btn-primary">Buy Now</a>
+      </div>
+
+      <script src="https://js.stripe.com/v3/"></script>
+
+      <script>
+
+        const buy_now_button = document.querySelector('#buy_now_btn')
+
+        buy_now_button.addEventListener('click', event => {   
+          fetch('/checkout/')
+          .then((result) => { return result.json() })
+          .then((data) => {
+            var stripe = Stripe(data.stripe_public_key);
+
+            stripe.redirectToCheckout({
+            // Make the id field from the Checkout Session creation API response
+            // available to this file, so you can provide it as parameter here
+            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+              sessionId: data.session_id
+            }).then(function (result) {
+              // If `redirectToCheckout` fails due to a browser or network
+              // error, display the localized error message to your customer
+              // using `result.error.message`.
+            });
+          }) 
+        })
+      </script>
+
+      <footer class="footer">
+        <p>&copy; Store 2017</p>
+      </footer>
+    </div> <!-- /container -->
+  </body>
+</html>
