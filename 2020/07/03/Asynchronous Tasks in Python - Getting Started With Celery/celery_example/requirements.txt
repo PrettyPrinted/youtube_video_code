@@ -1,0 +1,9 @@
+amqp==2.6.0
+billiard==3.6.3.0
+celery==4.4.6
+future==0.18.2
+kombu==4.6.11
+pkg-resources==0.0.0
+pytz==2020.1
+SQLAlchemy==1.3.18
+vine==1.3.0
