@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Food Tracker | View Details</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Oswald|Ubuntu:400,700" rel="stylesheet">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='bs/css/united.min.css') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+
+		<div class="container-fluid" id="wrapper">
+			
+			<div class="row" id="homeJumbo">
+				<div class="overlay"></div>
+				<div class="col-lg-12">
+					<h1>
+						<a href="{{ url_for('main.index') }}">FOOD TRACKER</a>
+					</h1>
+					
+					<div class="row t20">
+						<div class="col-lg-4 col-lg-offset-4">
+							<ul class="nav nav-pills nav-justified">
+							  <li role="presentation">
+							  	<a href="{{ url_for('main.index') }}" title="Home">Home</a>
+							  </li>
+							  <li role="presentation">
+							  	<a href="{{ url_for('main.add') }}" title="Add Food Item">Add Food Item</a>
+							  </li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row t20">
+				<div class="col-lg-4 col-lg-offset-4">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<form action="{{ url_for('main.add_food_to_log', log_id=log.id) }}" method="POST" role="form">
+							
+								<div class="form-group">
+									<label>Add Food</label>
+									<div class="input-group">
+									  <select class="form-control" name="food-select">
+										  {% for food in foods %}     
+											<option value="{{ food.id }}">{{ food.name }}</option>
+									      {% endfor %}
+					                    </select>
+									  <span class="input-group-btn">
+										<button type="submit" class="btn btn-primary" id="add-btn">
+										  <i class="glyphicon glyphicon-plus-sign"></i> Add Food
+										</button>
+									  </span>
+									</div>
+								</div>
+							
+							</form>	
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row t20">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="lean-h text-black">
+								<i class="glyphicon glyphicon-calendar"></i> {{ log.date.strftime('%B %d, %Y') }}
+							</h3>
+
+							<div class="row">
+								<div class="col-lg-3">
+									<h4 class="lean-h">
+										Protein: &nbsp;<strong class="f25">{{ totals['protein'] }}</strong>
+									</h4>
+								</div>
+								<div class="col-lg-3">
+									<h4 class="lean-h">
+										Carbohydrates: <strong class="f25">{{ totals['carbs'] }}</strong>
+									</h4>
+								</div>
+								<div class="col-lg-3">
+									<h4 class="lean-h">
+										Fat: <strong class="f25">{{ totals['fat'] }}</strong>
+									</h4>
+								</div>
+								<div class="col-lg-3">
+									<h4 class="lean-h">
+										Calories: <strong class="f25">{{ totals['calories'] }}</strong>
+									</h4>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered">
+								<thead>
+									<tr>
+										<th style="width: 5%;">#</th>
+										<th>Name</th>
+										<th style="width: 10%;">Protein</th>
+										<th style="width: 16%;">Carbohydrates</th>
+										<th style="width: 10%;">Fat</th>
+										<th style="width: 12%;">Calories</th>
+										<th style="width: 20%;">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for food in log.foods %}
+									<tr>
+										<td>{{ loop.index }}</td><td>{{ food.name }}</td><td>{{ food.proteins }}</td>
+										<td>{{ food.carbs }}</td><td>{{ food.fats }}</th><td>{{ food.calories }}</td>
+										<td>
+											<a href="{{ url_for('main.remove_food_from_log', log_id=log.id, food_id=food.id) }}" class="btn btn-danger btn-xs">
+												<i class="glyphicon glyphicon-trash"></i> Delete
+											</a> 
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer>
+				<div class="row pad">
+					<div class="col-lg-12 text-center">
+						Copyright &copy; 2017 <strong>Food Tracker</strong>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+
+		<!-- jQuery -->
+		<script src="{{ url_for('static', filename='bs/js/jquery.min.js') }}"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="{{ url_for('static', filename='bs/js/bootstrap.min.js') }}"></script>
+	</body>
+</html>
