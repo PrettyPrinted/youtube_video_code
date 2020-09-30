@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+
+    <style>
+        .book-item {
+            text-align: center;
+            border-style: solid;
+            border-width: thin;
+            width: 50%;
+            margin: auto;
+        }
+
+        .page-links {
+            text-align: center;
+            margin: auto;
+            width: 50%
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Total Number of Books: {{ count }}</h2>
+    <h2>Page Number: {{ page.number }}</h2>
+
+    {% for book in page.object_list %}
+    <div class="book-item">{{ book.title }} by {{ book.author}}</div> <br>
+    {% endfor %}
+
+    <div class="page-links">
+        {% if page.has_previous %}
+        <a href="{% url 'index' %}?page={{ page.previous_page_number }}">Previous Page</a>
+        {% endif %}
+        {% if page.has_next %}
+        <a href="{% url 'index' %}?page={{ page.next_page_number }}">Next Page</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>
