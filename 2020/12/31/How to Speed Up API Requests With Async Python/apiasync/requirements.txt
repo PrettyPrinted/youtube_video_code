@@ -1,0 +1,12 @@
+aiohttp==3.7.3
+async-timeout==3.0.1
+attrs==20.3.0
+certifi==2020.12.5
+chardet==3.0.4
+idna==2.10
+multidict==5.1.0
+pkg-resources==0.0.0
+requests==2.25.1
+typing-extensions==3.7.4.3
+urllib3==1.26.2
+yarl==1.6.3
