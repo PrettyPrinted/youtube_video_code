@@ -1,0 +1,8 @@
+-------------------day1.txt-------------------
+Today I learned how to use the open function in Python.
+-------------------day2.txt-------------------
+I wrote some Python today.
+-------------------day2_afternoon.txt-------------------
+I wrote even more Python.
+-------------------day3.txt-------------------
+Today I planned to write some code, but I watched YouTube instead.
