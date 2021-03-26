@@ -1,0 +1,31 @@
+.navbar-default, .btn, .form-control, .panel {
+	border-radius: 0;
+}
+.navbar-default {
+    background-color: rgba(245, 245, 220, .7);
+    border-color: rgba(245, 245, 220, .6);
+    box-shadow: 0px 3px 3px 0px #ddd;
+}
+.navbar-default .navbar-nav>.active>a, 
+.navbar-default .navbar-nav>.active>a:focus, 
+.navbar-default .navbar-nav>.active>a:hover {
+    background-color: rgba(245, 245, 220, .9);
+    border-bottom: 4px solid #ddd;
+}
+.panel-default > .panel-heading {
+    color: #333;
+    background-color: rgba(245, 245, 220, .7);
+    border-color: rgba(245, 245, 220, .6);
+    border-top-left-radius: 0;
+	border-top-right-radius: 0; 
+}
+.panel-footer {
+	background-color: rgba(245, 245, 220, .5);
+    border-color: rgba(245, 245, 220, .4);
+}
+.panel {
+	box-shadow: 0px 3px 3px 0px #ddd;
+}
+a.navbar-brand, .panel-title {
+	font-weight: bolder;
+}

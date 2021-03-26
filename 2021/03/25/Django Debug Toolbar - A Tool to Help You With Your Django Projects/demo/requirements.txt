@@ -1,0 +1,7 @@
+asgiref==3.3.1
+Django==3.1.7
+django-debug-toolbar==3.2
+django-widget-tweaks==1.4.8
+pkg-resources==0.0.0
+pytz==2021.1
+sqlparse==0.4.1
