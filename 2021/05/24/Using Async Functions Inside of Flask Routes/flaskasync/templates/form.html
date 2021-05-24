@@ -1,0 +1,114 @@
+{% macro input(name, label, value='', type='text') -%}
+    <label for="{{ name }}" class="form-label">{{ label }}</label>
+    <input type="text" class="form-control {% if form[name] and not errors[name] %}is-valid{% elif errors[name] %}is-invalid{% endif %}" id="{{ name }}" name="{{ name }}" placeholder="" value="{{ form[name] }}" required>
+    {% if errors[name] %}
+    <div class="invalid-feedback">
+        {{ errors[name] }}
+    </div>
+    {% endif %}
+{%- endmacro %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Server Side Validation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='form-validation.css') }}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+        <main>
+            <div class="py-5 text-center">
+                <h2>Form</h2>
+                <p class="lead">This form is used to demonstrate the differences between using server-side validation with async requests and sync requests.</p>
+            </div>
+
+            <div class="col-md-12 col-lg-12">
+                <form class="needs-validation" method="POST" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            {{ input('firstName', 'First name') }}
+                        </div>
+
+                        <div class="col-sm-6">
+                            {{ input('lastName', 'Last name') }}
+                        </div>
+
+                        <div class="col-12">
+                            {{ input('phoneNumber', 'Phone number') }}
+                        </div>
+
+                        <div class="col-12">
+                            {{ input('email', 'Email') }}
+                        </div>
+
+                        <div class="col-12">
+                            {{ input('address', 'Address') }}
+                        </div>
+
+                        <div class="col-12">
+                            {{ input('address2', 'Address 2') }}
+                        </div>
+
+                        <div class="col-12">
+                            {{ input('city', 'City') }}
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="state" class="form-label">State</label>
+                            <select class="form-select {% if form['state'] and not errors['state'] %}is-valid{% elif errors['state'] %}is-invalid{% endif %}" id="state" name="state" required>
+                                <option value="">Choose...</option>
+                                {% for state in states %}
+                                    <option value="{{ state[0] }}" {% if state[0] == form['state'] %}selected{% endif %}>{{ state[1] }}</option>
+                                {% endfor %}
+                                
+                            </select>
+                            {% if errors['state'] %}
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-sm-6">
+                            {{ input('zip', 'Zip code') }}
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>
