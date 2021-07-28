@@ -1,0 +1,9 @@
+asgiref==3.4.1
+Django==3.2.5
+django-debug-toolbar==3.2.1
+Faker==8.10.3
+python-dateutil==2.8.2
+pytz==2021.1
+six==1.16.0
+sqlparse==0.4.1
+text-unidecode==1.3
