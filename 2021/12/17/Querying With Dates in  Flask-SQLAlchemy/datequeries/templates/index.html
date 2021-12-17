@@ -1,0 +1,6 @@
+<h1>Transactions</h1>
+<h3>Amount - Date Posted - Datetime Posted</h3>
+
+{% for transaction in transactions %}
+    <p>{{ transaction.amount }} - {{ transaction.date_posted }} - {{ transaction.datetime_posted }}</p>
+{% endfor %}
