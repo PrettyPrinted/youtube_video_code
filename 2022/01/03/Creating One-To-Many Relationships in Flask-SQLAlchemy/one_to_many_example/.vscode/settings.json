@@ -1,0 +1,10 @@
+{
+    "editor.parameterHints.enabled": false,
+    "editor.hover.enabled": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
+}
