@@ -1,0 +1,13 @@
+<div style="display: flex; justify-content: center;">
+    <form method="post">
+        {{ form.csrf_token }}
+        {% for field in form %}
+        <p>
+            {% if field.name != 'csrf_token' %}
+            {{ field.label }}: {{ field }}
+            {% endif %}
+        </p>
+        {% endfor %}
+        <button>Submit</button>
+    </form>
+</div>
