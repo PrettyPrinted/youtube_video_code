@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dropdown</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+        <div class="select is-large">
+            <select name="language" hx-trigger="change, load" hx-get="/frameworks" hx-target="#frameworks">
+                <option value="Python">Python</option>
+                <option value="Ruby">Ruby</option>
+                <option value="JavaScript">JavaScript</option>
+            </select>
+          </div>
+          <div class="select is-large">
+            <select id="frameworks">
+            </select>
+          </div>
+    </div>
+  </section>
+  <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+  </body>
+</html>
