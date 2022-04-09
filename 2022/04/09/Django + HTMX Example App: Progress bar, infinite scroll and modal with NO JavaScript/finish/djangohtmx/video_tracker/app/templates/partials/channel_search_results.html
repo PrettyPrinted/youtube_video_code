@@ -1,0 +1,33 @@
+<div id="channel_results_modal" class="modal is-active" hx-target="#channel-section" hx-swap="outerHTML">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search Results</p>
+      </header>
+      <section class="modal-card-body">
+        {% if results %}
+            {% for result in results %}
+            <article class="media">
+                <figure class="media-left">
+                <p class="image is-64x64">
+                    <img src="{{ result.snippet.thumbnails.default.url }}">
+                </p>
+                </figure>
+                <div class="media-content">
+                <div class="content">
+                    <p>
+                    <a hx-post="{% url 'add-channel' result.snippet.channelId %}"><strong>{{ result.snippet.title }}</strong></a>
+                    <br>
+                    {{ result.snippet.description }}
+                    </p>
+                </div>
+                </div>
+                
+            </article>
+            {% endfor %}
+        {% else %}
+        No results found
+        {% endif %}
+      </section>
+    </div>
+  </div>

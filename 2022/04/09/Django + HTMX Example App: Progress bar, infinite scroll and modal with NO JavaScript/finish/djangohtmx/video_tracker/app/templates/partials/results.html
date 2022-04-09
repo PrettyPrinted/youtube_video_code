@@ -1,0 +1,36 @@
+{% load humanize %}
+
+<div id="results-section">
+    <section>
+      <div class="columns is-centered mt-5">
+        <button class="button is-primary" hx-get="{% url 'generate' %}" hx-target="#results-section">Generate</button>
+        </div>
+    </section>
+  
+    <section class="section">
+      <div class="container">
+          <table class="table is-fullwidth">
+              <thead>
+                <tr>
+                  <th>Channel Name</th>
+                  <th>Video Title</th>
+                  <th>Views</th>
+                  <th>Likes</th>
+                  <th>Date Published</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for result in results %}
+                <tr {% if forloop.last %} hx-get="{% url 'get-next-rows' %}?offset=50" hx-trigger="revealed" hx-swap="afterend" {% endif %}>
+                  <td>{{ result.channel.name }}</td>
+                  <td><a href="https://youtube.com/watch?v={{ result.youtube_id }}">{{ result.title }}</a></td>
+                  <td>{{ result.views|intcomma }}</td>
+                  <td>{{ result.likes|intcomma }}</td>
+                  <td>{{ result.date_published }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+      </div>
+    </section>
+  </div>

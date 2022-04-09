@@ -1,0 +1,11 @@
+{% load humanize %}
+
+{% for result in results %}
+<tr {% if forloop.last %} hx-get="{% url 'get-next-rows' %}?offset={{offset}}" hx-trigger="revealed" hx-swap="afterend" {% endif %}>
+    <td>{{ result.channel.name }}</td>
+    <td><a href="https://youtube.com/watch?v={{ result.youtube_id }}">{{ result.title }}</a></td>
+    <td>{{ result.views|intcomma }}</td>
+    <td>{{ result.likes|intcomma }}</td>
+    <td>{{ result.date_published }}</td>
+  </tr>
+{% endfor %}

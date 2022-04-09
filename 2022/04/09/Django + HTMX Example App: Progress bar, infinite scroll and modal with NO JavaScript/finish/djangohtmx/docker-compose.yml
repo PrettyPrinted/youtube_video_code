@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3.6.6
+    ports:
+      - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=password
+  redis:
+    image: redis
+    ports:
+    - 6379:6379
