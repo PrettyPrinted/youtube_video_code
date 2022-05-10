@@ -35,7 +35,7 @@ pexpect==4.2.1
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
 pycrypto==2.6.1
-Pygments==2.2.0
+Pygments==2.7.4
 PyGObject==3.26.1
 PyJWT==1.5.3
 pyOpenSSL==17.5.0
