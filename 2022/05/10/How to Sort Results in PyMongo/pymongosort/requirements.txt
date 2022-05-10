@@ -52,7 +52,7 @@ six==1.11.0
 sos==4.3
 ssh-import-id==5.7
 systemd-python==234
-Twisted==17.9.0
+Twisted==22.4.0
 ufw==0.36
 urllib3==1.22
 zope.interface==4.3.2
