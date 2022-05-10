@@ -43,7 +43,7 @@ pyserial==3.4
 python-apt==1.6.5+ubuntu0.7
 python-debian==0.1.32
 pyxdg==0.25
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.4
 requests-unixsocket==0.1.5
 SecretStorage==2.3.1
