@@ -8,5 +8,5 @@ psycopg2==2.8.5
 pytz==2020.1
 requests==2.23.0
 sqlparse==0.3.1
-urllib3==1.25.9
+urllib3==1.26.5
 whitenoise==5.1.0
