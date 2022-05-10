@@ -12,7 +12,7 @@ constantly==15.1.0
 cryptography==2.1.4
 distro-info===0.18ubuntu0.18.04.1
 greenlet==0.4.12
-httpie==0.9.8
+httpie==3.1.0
 httplib2==0.9.2
 hyperlink==17.3.1
 idna==2.6
