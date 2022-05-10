@@ -28,7 +28,7 @@ msgpack==0.5.6
 mysql-connector-python==2.1.6
 neovim==0.2.0
 netifaces==0.10.4
-numpy==1.13.3
+numpy==1.21.0
 oauthlib==2.0.6
 PAM==0.4.2
 pexpect==4.2.1
