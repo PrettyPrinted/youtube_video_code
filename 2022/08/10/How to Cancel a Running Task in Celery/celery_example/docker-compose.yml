@@ -1,0 +1,26 @@
+services:
+  redis:
+    image: redis
+  celery:
+    build:
+      context: . 
+    environment:
+      FLASK_APP: app 
+    volumes:
+      - .:/app
+    command: celery -A app.celery worker --loglevel=info
+    depends_on:
+      - redis
+  web:
+    build:
+      context: .
+    environment:
+      FLASK_APP: app
+      FLASK_ENV: development
+    volumes:
+      - .:/app
+    command: flask run -h 0.0.0.0
+    ports:
+      - 5000:5000
+    depends_on:
+      - celery
