@@ -1,0 +1,33 @@
+services:
+
+  production:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
+
+  development:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    command: -p 5433
+    ports:
+      - 5433:5433
+
+  empty:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    command: -p 5434
+    ports:
+      - 5434:5434
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
