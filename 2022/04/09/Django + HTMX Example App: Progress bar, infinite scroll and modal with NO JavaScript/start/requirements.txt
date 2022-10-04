@@ -11,7 +11,7 @@ click-didyoumean==0.3.0
 click-plugins==1.1.1
 click-repl==0.2.0
 Deprecated==1.2.13
-Django==4.0.3
+Django==4.0.7
 idna==3.3
 kombu==5.2.4
 packaging==21.3
