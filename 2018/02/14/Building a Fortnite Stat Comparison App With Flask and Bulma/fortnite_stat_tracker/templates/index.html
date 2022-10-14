@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+    <title>Fortnite Comparison</title>
+</head>
+<body>
+<section class="hero is-primary">
+
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Fortnite Comparison
+      </h1>
+      <h2 class="subtitle">
+        Compare the stats of two players.
+      </h2>
+    </div>
+  </div>
+
+</section>
+
+  <section class="section">
+    <div class="container">
+        <form method="POST" action="/">
+<div class="field is-grouped">
+  <p class="control is-expanded">
+    <input type="hidden" name="playerOneName" value="{% if player_one %}{{ player_one }}{% endif %}">
+    <input class="input" name="playerName" type="text" placeholder="Player Name">
+  </p>
+  <p class="control">
+    <button class="button is-info">
+      Search
+    </button>
+  </p>
+</div>
+    </form>
+    </div>
+  </section>
+
+    <section class="section">
+    <div class="container">
+     <div class="tile is-ancestor">
+  <div class="tile is-vertical">
+    <div class="tile">
+      {% if player_one %}
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification is-danger">
+          <p class="title">{{ player_one }}</p>
+          <p class="subtitle">Wins: {{ player_one_stats['wins'] }}</p>
+          <p class="subtitle">Matches: {{ player_one_stats['matches'] }}</p>
+          <p class="subtitle">Kills: {{ player_one_stats['kills'] }}</p>
+        </article>
+      </div>
+      {% endif %}
+      {% if player_two %}
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-info">
+          <p class="title">{{ player_two }}</p>
+          <p class="subtitle">Wins: {{ player_two_stats['wins'] }}</p>
+          <p class="subtitle">Matches: {{ player_two_stats['matches'] }}</p>
+          <p class="subtitle">Kills: {{ player_two_stats['kills'] }}</p>
+        </article>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+  
+</div>
+    </div>
+  </section>
+
+</body>
+</html>
