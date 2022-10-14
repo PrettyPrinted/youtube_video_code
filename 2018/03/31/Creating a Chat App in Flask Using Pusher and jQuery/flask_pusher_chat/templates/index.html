@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pusher Test</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+</head>
+
+<body style="overflow-y:hidden;" class="has-navbar-fixed-bottom">
+
+  <nav class="navbar is-fixed-bottom" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-item is-expanded">
+
+        <input id="chat_text" class="input" type="text">
+        <a id="chat_btn" class="button is-info">
+          Post
+        </a>
+
+      </div>
+    </div>
+
+  </nav>
+
+  <div id="content" class="container" style="overflow-y:auto; margin-bottom: 100px;">
+
+    {% for message in messages %}
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>{{ message.username }}</strong>
+            <br> {{ message.message }}
+          </p>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+
+  <div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input id="username_input" class="input" type="text" placeholder="Choose a username">
+        </div>
+        <div class="control">
+          <a id="start_chat" class="button is-info">
+            Start Chatting
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  <script>
+
+    $(function() {
+
+      let username;
+
+      $('#start_chat').on('click', function() {
+
+        username = $('#username_input').val();
+        $('.modal').removeClass('is-active');
+
+      });
+
+      $('#chat_btn').on('click', function() {
+
+        let message = $('#chat_text').val();
+
+        $.post('/message', {'username' : username, 'message' : message}, function() {
+          $('#chat_text').val('');
+        });
+
+      });
+
+          // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher('APP_KEY', {
+        cluster: 'us2',
+        encrypted: true
+      });
+
+      var channel = pusher.subscribe('chat-channel');
+
+      channel.bind('new-message', function(data) {
+
+          let name = data.username;
+          let message = data.message;
+
+          let message_template = `<article class="media">
+                                  <div class="media-content">
+                                    <div class="content">
+                                      <p>
+                                        <strong>${name}</strong>
+                                        <br> ${message}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </article>`;
+                                
+          $('#content').append(message_template);
+
+        });
+
+      
+      
+    });
+
+  </script>
+
+</body>
+
+</html>
