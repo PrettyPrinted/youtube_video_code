@@ -1,0 +1,21 @@
+{
+  "name": "weather_express",
+  "version": "1.0.0",
+  "description": "A weather app.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Anthony Herbert",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.9",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.15",
+    "nodemon": "^1.17.3",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  }
+}
