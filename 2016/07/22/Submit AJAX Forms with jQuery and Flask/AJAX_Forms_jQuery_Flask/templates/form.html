@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX Example</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+</head>
+<body>
+<div class="container">
+	<br><br><br><br>
+	<form class="form-inline">
+	  <div class="form-group">
+	    <label class="sr-only" for="emailInput">Email address</label>
+	    <input type="email" class="form-control" id="emailInput" placeholder="Email">
+	  </div>
+	  <div class="form-group">
+	    <label class="sr-only" for="nameInput">Name</label>
+	    <input type="text" class="form-control" id="nameInput" placeholder="First Name">
+	  </div>
+	  <button type="submit" class="btn btn-default">Submit</button>
+	</form>
+	<br>
+	<div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+	<div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+</div>
+</body>
+</html>
