@@ -1,0 +1,58 @@
+:root {
+    --clr-bright-orange: hsl(31, 77%, 52%);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    background-color: #bdd5ea;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #577399;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+input {
+    width: 304px;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    font-size: 18px;
+}
+
+button {
+    border: 0;
+    background-color: #495867;
+    border-radius: 10px;
+    color: #FE5F55;
+    width: 304px;
+    margin: 10px;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+p {
+    color: rgb(135, 2, 2);
+    font-weight: bold;
+    margin: 10px;
+}
