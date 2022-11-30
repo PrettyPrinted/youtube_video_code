@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <form method="POST">
+        <input type="text" name="city" placeholder="City" />
+        <select name="country">
+            {% for country in countries %}
+                <option value="{{ country.id }}">{{ country.name }}</option>
+            {% endfor %}
+        </select>
+        <button>Add City</button>
+    </form>
+
+    {% for city in cities %}
+        <p>{{ city.name }}, {{ city.country.name }}</p>
+    {% endfor %}
+</body>
+</html>

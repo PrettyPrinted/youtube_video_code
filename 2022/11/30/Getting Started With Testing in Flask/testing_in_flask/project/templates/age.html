@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    {% if age %}
+    <h1>You are {{ age }} years old.</h1>
+    {% endif %}
+    <form method="POST">
+        <input type="text" name="name" placeholder="Name" />
+        <button>Guess Age</button>
+    </form>
+</body>
+</html>
