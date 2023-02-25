@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>FileStack Demo</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" integrity="sha512-AqJL+6UW6QfaVaUHQKTgaL41UGab5TEsZmReAtXwvmBHUbHpVmszFErWueaWxx8lSlSVKND5zjTShiYf0Llgtg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+		<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid" id="wrapper">
+			<div class="row">
+				<div class="col-lg-4 col-lg-offset-4" id="content">
+					<h2>SAVE FILES</h2>
+					<form method="POST" role="form">
+						<div class="form-group">
+							<div class="input-group">
+							  <input type="text" class="form-control" placeholder="Enter description of files" name="description" required>
+							  <span class="input-group-btn">
+								  <button class="btn btn-default" id="upload-btn">Upload</button>
+							  </span>
+							</div>
+						</div>
+
+						<ul id="uploaded-filenames">
+						</ul>
+						<div id="filestack-handles">
+						</div>
+					
+						<div class="row t10">
+							<div class="col-lg-12 text-center">
+								<div class="btn-group ">
+									<button type="submit" class="btn btn-warning">
+										SAVE FILE(S)
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+
+					<ul class="list-group t20">
+						{% for f in files %} 
+						<li title="{{ f.description }}" class="list-group-item">
+							<a href="https://cdn.filestackcontent.com/{{ f.handle }}">{{ f.filename }}</a>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+    
+	<script>
+		const FILESTACK_APP_KEY = '{{ config["FILESTACK_APP_KEY"] }}';
+		const FILESTACK_MAX_FILES = {{ config["FILESTACK_MAX_FILES"] }};
+		const FILESTACK_SOURCES = {{ config["FILESTACK_SOURCES"]|safe }};
+	</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+	</body>
+</html>
