@@ -1,0 +1,2 @@
+FLASK_APP=basicauth
+FLASK_DEBUG=1
