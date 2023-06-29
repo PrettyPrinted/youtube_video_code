@@ -1,0 +1,7 @@
+asgiref==3.7.2
+dj-database-url==2.0.0
+Django==3.2.19
+gunicorn==20.1.0
+psycopg2-binary==2.9.6
+sqlparse==0.4.4
+typing_extensions==4.7.0
