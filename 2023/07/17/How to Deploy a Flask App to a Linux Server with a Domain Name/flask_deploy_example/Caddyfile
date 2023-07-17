@@ -1,0 +1,7 @@
+www.prettyprinted.net {
+    redir https://prettyprinted.net{uri}
+}
+
+prettyprinted.net {
+    reverse_proxy localhost:8000
+}
