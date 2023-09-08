@@ -1,0 +1,26 @@
+services:
+  redis:
+    image: redis
+  web:
+    build:
+      context: .
+    environment:
+      FLASK_APP: run
+      FLASK_DEBUG: 1
+      DATABASE_URL: postgresql://flask_celery_postgres_user:IprJxGy216tm2UVCIdyBFGogOWE4yEAg@dpg-cjt7fop5mpss738ds650-a.oregon-postgres.render.com/flask_celery_postgres
+    volumes:
+      - .:/app
+    command: flask run -h 0.0.0.0
+    ports:
+      - 5000:5000
+  celery:
+    build:
+        context: .
+    environment:
+      FLASK_APP: run
+      DATABASE_URL: postgresql://flask_celery_postgres_user:IprJxGy216tm2UVCIdyBFGogOWE4yEAg@dpg-cjt7fop5mpss738ds650-a.oregon-postgres.render.com/flask_celery_postgres
+    volumes:
+      - .:/app
+    command: celery -A run.celery worker --loglevel=info
+    depends_on:
+      - redis
