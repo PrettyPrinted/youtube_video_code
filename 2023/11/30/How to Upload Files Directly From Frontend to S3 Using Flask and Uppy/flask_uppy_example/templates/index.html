@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uppy Demo</title>
+    <link href="https://releases.transloadit.com/uppy/v3.18.1/uppy.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- 2. Initialize -->
+    <div id="uppy"></div>
+
+    <script type="module">
+    import { Uppy, Dashboard, AwsS3 } from "https://releases.transloadit.com/uppy/v3.18.1/uppy.min.mjs"
+    const uppy = new Uppy()
+    uppy.use(Dashboard, { target: '#uppy', inline: true })
+    .use(AwsS3, {
+        getUploadParameters(file, options) {
+            return fetch("/uppy/s3").then((response) => response.json())
+        }
+    })
+
+    uppy.on("upload-sucess", (file, response) => {
+        alert(response.uploadURL);
+    })
+</script>
+</body>
+</html>
