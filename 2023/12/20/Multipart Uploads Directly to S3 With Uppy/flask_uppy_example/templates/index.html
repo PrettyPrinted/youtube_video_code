@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uppy Demo</title>
+    <link href="https://releases.transloadit.com/uppy/v3.18.1/uppy.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- 2. Initialize -->
+    <div id="uppy"></div>
+
+    <script type="module">
+    import { Uppy, Dashboard, AwsS3 } from "https://releases.transloadit.com/uppy/v3.18.1/uppy.min.mjs"
+    const uppy = new Uppy()
+    uppy.use(Dashboard, { target: '#uppy', inline: true })
+    .use(AwsS3, {
+        getUploadParameters(file, options) {
+            return fetch("/uppy/s3").then((response) => response.json())
+        },
+        shouldUseMultipart(file) {
+            return true
+        },
+        createMultipartUpload(file) {
+            let data = {"type": file.type}
+            return fetch("/uppy/s3-multipart", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            }).then((response) => response.json())
+        },
+        listParts(file, { uploadId, key }) {
+            let data = {"key": key}
+            return fetch(`/uppy/s3-multipart/${uploadId}`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            }).then((response) => response.json())            
+        },
+        signPart(file, { key, uploadId, partNumber }) {
+            let data = {"key": key}
+            return fetch(`/uppy/s3-multipart/${uploadId}/${partNumber}`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            }).then((response) => response.json())                
+        },
+        abortMultipartUpload(file, { uploadId, key }) {
+            let data = {"key": key}
+            return fetch(`/uppy/s3-multipart/${uploadId}`, {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            }).then((response) => response.json())                
+        },
+        completeMultipartUpload(file, { uploadId, key, parts }) {
+            let data = {"key": key, "parts": parts}
+            return fetch(`/uppy/s3-multipart/${uploadId}/complete`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            }).then((response) => response.json())               
+        }
+    })
+
+    uppy.on("upload-success", (file, response) => {
+        alert(response.uploadURL);
+    })
+</script>
+</body>
+</html>
