@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Streaming Example</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 50px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            display: inline;
+            max-width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <textarea id="input" placeholder="Enter your message" cols="50"></textarea>
+        <button type="submit">Send</button>
+    </form>
+    <pre id="body"></pre>
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const body = document.getElementById('body');
+        const submit_btn = document.querySelector('button');
+        const input = document.getElementById('input');
+
+        submit_btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            const response = await fetch("/answer", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({message: input.value})
+            });
+
+            const reader = response.body.getReader();
+            let output = "";
+
+            while (true) {
+                const { done, value } = await reader.read();
+                output += new TextDecoder().decode(value);
+                body.innerHTML = marked.parse(output);
+
+                if (done) {
+                    return;
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
