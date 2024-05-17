@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+  </head>
+  <body>
+  <section class="section">
+    <div class="container mb-5">
+      <h1 class="title">
+        Search Books
+      </h1>
+      <form method="GET">
+        <div class="field has-addons">
+            <div class="control">
+            <input class="input" type="text" placeholder="Find a book" name="q">
+            </div>
+            <div class="control">
+            <button class="button is-info">
+                Search
+            </button>
+            </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+
+     {% if books %}
+     {% for book in books %}
+      <article class="media">
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>{{ book.title }}</strong> <small>{{ book.author }}</small>
+              <br />
+                {{ book.description }}
+            </p>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+      {% endif %}
+
+    </div>
+  </section>
+  </body>
+</html>
