@@ -1,0 +1,86 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-09-18 07:58+0700\n"
+"PO-Revision-Date: 2024-09-18 07:49+0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: project/templates/index.html:15
+msgid "Create Reservation"
+msgstr "Crear Reserva"
+
+#: project/templates/index.html:19 project/templates/index.html:21
+#: project/templates/index.html:91
+msgid "Name"
+msgstr "Nombre"
+
+#: project/templates/index.html:25 project/templates/index.html:27
+msgid "Number of Guests"
+msgstr "Numero de invitados"
+
+#: project/templates/index.html:31 project/templates/index.html:93
+msgid "Date"
+msgstr "Fecha"
+
+#: project/templates/index.html:37 project/templates/index.html:39
+msgid "Number of Nights"
+msgstr "Número de noches"
+
+#: project/templates/index.html:44
+msgid "Room Type"
+msgstr "Tipo de habitación"
+
+#: project/templates/index.html:48
+msgid "Single"
+msgstr "Soltero"
+
+#: project/templates/index.html:49
+msgid "Double"
+msgstr "Doble"
+
+#: project/templates/index.html:50
+msgid "Suite"
+msgstr "Suite"
+
+#: project/templates/index.html:56
+msgid "Currency"
+msgstr "Divisa"
+
+#: project/templates/index.html:68 project/templates/index.html:70
+#: project/templates/index.html:96
+msgid "Amount"
+msgstr "Cantidad"
+
+#: project/templates/index.html:76
+msgid "Submit"
+msgstr "Entregar"
+
+#: project/templates/index.html:86
+msgid "Reservations"
+msgstr "Reservaciones"
+
+#: project/templates/index.html:92
+msgid "Guests"
+msgstr "Invitados"
+
+#: project/templates/index.html:94
+msgid "Nights"
+msgstr "Noches"
+
+#: project/templates/index.html:95
+msgid "Room"
+msgstr "Habitación"
+

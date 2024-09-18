@@ -1,0 +1,17 @@
+Reservations - Reservaciones
+Reservation - Reserva
+Create Reservation - Crear Reserva
+Name - Nombre
+Number of Guests - Numero de invitados
+Date - Fecha
+Number of Nights - Número de noches
+Room Type - Tipo de habitación
+Single - Soltero
+Double - Doble
+Suite - Suite
+Currency - Divisa
+Amount - Cantidad
+Submit - Entregar
+Guests - Invitados
+Nights - Noches
+Room - Habitación

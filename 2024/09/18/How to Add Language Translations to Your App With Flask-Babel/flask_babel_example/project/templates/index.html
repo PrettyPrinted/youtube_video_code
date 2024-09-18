@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reservations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                {{ gettext("Create Reservation") }}
+            </h1>
+            <form method="POST">
+                <div class="field">
+                    <label class="label">{{ gettext("Name") }}</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="{{ gettext("Name") }}">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ gettext("Number of Guests") }}</label>
+                    <div class="control">
+                        <input class="input" type="number" name="guests" placeholder="{{ gettext("Number of Guests") }}">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ gettext("Date") }}</label>
+                    <div class="control">
+                        <input class="input" name="date" type="date">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ gettext("Number of Nights") }}</label>
+                    <div class="control">
+                        <input class="input" type="number" name="nights" placeholder="{{ gettext("Number of Nights") }}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">{{ gettext("Room Type") }}</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="room">
+                                <option>{{ gettext("Single") }}</option>
+                                <option>{{ gettext("Double") }}</option>
+                                <option>{{ gettext("Suite") }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ gettext("Currency") }}</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="currency">
+                                <option>USD</option>
+                                <option>GBP</option>
+                                <option>EUR</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">{{ gettext("Amount") }}</label>
+                    <div class="control">
+                        <input class="input" type="number" name="amount" placeholder="{{ gettext("Amount") }}">
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">{{ gettext("Submit") }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                {{ gettext("Reservations") }}
+            </h1>
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>{{ gettext("Name") }}</th>
+                        <th>{{ gettext("Guests") }}</th>
+                        <th>{{ gettext("Date") }}</th>
+                        <th>{{ gettext("Nights") }}</th>
+                        <th>{{ gettext("Room") }}</th>
+                        <th>{{ gettext("Amount") }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.name }}</td>
+                        <td>{{ reservation.guests }}</td>
+                        <td>{{ reservation.date|dateformat }}</td>
+                        <td>{{ reservation.nights }}</td>
+                        <td>{{ reservation.room }}</td>
+                        <td>{{ reservation.amount|currencyformat(reservation.currency) }} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>
