@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+    <style>
+        body {
+            background-color: Canvas;
+            color: CanvasText;
+            color-scheme: light dark;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <input type="text" name="task" placeholder="Task">
+        <button type="submit">Add</button>
+    </form>
+
+    <ul>
+    {% for task in todos %}
+        <li>{{ task.task }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

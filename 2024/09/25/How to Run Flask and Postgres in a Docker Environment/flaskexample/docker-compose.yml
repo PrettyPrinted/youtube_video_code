@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app
+    environment:
+      FLASK_DEBUG: 1
+    command: flask run -h 0.0.0.0
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    ports:
+     - 8080:8080
+volumes:
+  db_data:
