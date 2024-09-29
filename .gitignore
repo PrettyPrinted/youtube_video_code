@@ -297,4 +297,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-
+!2024/09/25/How to Run Flask and Postgres in a Docker Environment/flaskexample/.env
