@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Modal Example</title>
+    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+            background-color: gray;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            width: 50%;
+            border: 1px solid black;
+            margin: 15% auto;
+        }
+    </style>
+</head>
+<body>
+    <button hx-get="/modal" hx-target="#modal-container">Open Modal</button>
+    <div id="modal-container"></div>
+</body>
+</html>
