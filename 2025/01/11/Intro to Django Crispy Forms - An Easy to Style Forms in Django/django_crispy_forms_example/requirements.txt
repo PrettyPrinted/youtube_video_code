@@ -1,0 +1,6 @@
+asgiref==3.8.1
+crispy-bulma==0.11.0
+Django==5.1.4
+django-crispy-forms==2.3
+sqlparse==0.5.3
+typing_extensions==4.12.2
