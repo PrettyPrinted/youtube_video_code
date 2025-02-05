@@ -1,0 +1,9 @@
+Region,Product,Salesperson,Sales,Units
+North,Laptop,John,5000,10
+North,Phone,John,3000,5
+South,Laptop,Sarah,4500,9
+South,Tablet,Sarah,2000,4
+North,Tablet,Mike,2500,5
+South,Phone,Mike,3500,7
+North,Laptop,Sarah,4800,8
+South,Laptop,John,5200,11
