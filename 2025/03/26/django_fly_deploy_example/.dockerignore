@@ -1,0 +1,5 @@
+fly.toml
+.git/
+*.sqlite3
+env
+credentials.txt
