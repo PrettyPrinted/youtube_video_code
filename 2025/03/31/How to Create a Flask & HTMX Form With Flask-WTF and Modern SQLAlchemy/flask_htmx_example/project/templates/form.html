@@ -1,0 +1,16 @@
+<form id="phone_number_form" hx-post="/save" hx-swap="outerHTML" hx-on::after-settle="document.getElementById('toast').classList.add('show-toast'); setTimeout(() => document.getElementById('toast').classList.remove('show-toast'), 3000);"> 
+    {{ form.csrf_token }}
+    <div id="phone-list">
+        {% for field in form.phone_numbers %}
+        <div class="phone-group" id="phone-{{ field.form.id.data }}">
+            {{ field.phone_type }}
+            {{ field.country_code(placeholder="1") }}
+            {{ field.area_code(placeholder="213") }}
+            {{ field.number(placeholder="555-1234") }}
+            <button class="delete-btn" {% if field.form.id.data %}hx-params="none" hx-delete="/delete/{{ field.form.id.data }}" hx-target="#phone_number_form" hx-swap="outerHTML"{% else %}disabled{% endif %}>Delete</button>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <button type="submit" class="submit-btn">Submit</button>
+</form>

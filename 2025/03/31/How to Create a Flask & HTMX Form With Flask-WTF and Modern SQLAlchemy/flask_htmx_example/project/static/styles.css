@@ -1,0 +1,96 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+    position: relative;
+}
+.container {
+    max-width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+label {
+    font-weight: 600;
+    display: block;
+    margin-top: 10px;
+}
+input, select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.phone-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f9f9f9;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #007bff;
+}
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    background: #c0392b;
+}
+.delete-btn:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.add-btn, .submit-btn {
+    display: block;
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.add-btn:hover, .submit-btn:hover {
+    background: #0056b3;
+}
+.phone-group input {
+    width: 30%;
+}
+.toast {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-weight: bold;
+}
+.show-toast {
+    display: block;
+}
