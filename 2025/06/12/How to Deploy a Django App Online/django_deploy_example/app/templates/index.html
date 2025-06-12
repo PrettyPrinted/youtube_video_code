@@ -1,0 +1,60 @@
+{% load static %}
+{% load humanize %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+
+  <title>Save Your Favorite Videos</title>
+
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Save Your Favorite Videos</h1>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="videoIdInput" class="form-label">YouTube URL</label>
+              <input type="text" name="video-url" class="form-control" id="videoIdInput">
+            </div>
+            <p>
+              <button type="submit" class="btn btn-primary my-2">Save Video</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for video in videos %}
+          <div class="col">
+            <div class="card shadow-sm h-100">
+              <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" width="100%" height="225"
+                class="bd-placeholder-img card-img-top">
+              <div class="card-body">
+                <p class="card-text">{{ video.title }}</p>
+                <div class="d-flex justify-content-end align-items-center">
+                  <small class="text-body-secondary">{{ video.view_count|intcomma }} views</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

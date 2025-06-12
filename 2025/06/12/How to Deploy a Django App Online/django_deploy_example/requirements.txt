@@ -1,0 +1,13 @@
+asgiref==3.8.1
+certifi==2025.4.26
+charset-normalizer==3.4.2
+django==5.2.2
+django-environ==0.12.0
+gunicorn==23.0.0
+idna==3.10
+packaging==25.0
+psycopg2-binary==2.9.10
+requests==2.32.4
+sqlparse==0.5.3
+urllib3==2.4.0
+whitenoise==6.9.0

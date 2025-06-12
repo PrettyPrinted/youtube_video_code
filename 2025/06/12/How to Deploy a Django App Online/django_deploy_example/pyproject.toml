@@ -1,0 +1,14 @@
+[project]
+name = "django-deploy-example"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "django>=5.2.2",
+    "django-environ>=0.12.0",
+    "gunicorn>=23.0.0",
+    "psycopg2-binary>=2.9.10",
+    "requests>=2.32.4",
+    "whitenoise>=6.9.0",
+]
