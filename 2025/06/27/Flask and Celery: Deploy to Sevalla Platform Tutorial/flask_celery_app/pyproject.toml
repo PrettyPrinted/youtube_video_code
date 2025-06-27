@@ -1,0 +1,16 @@
+[project]
+name = "flask-celery-app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "celery>=5.5.3",
+    "flask>=3.1.1",
+    "flask-sqlalchemy-lite>=0.1.0",
+    "gunicorn>=23.0.0",
+    "openai>=1.91.0",
+    "psycopg2-binary>=2.9.10",
+    "python-dotenv>=1.1.1",
+    "redis>=6.2.0",
+]
