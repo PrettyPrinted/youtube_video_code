@@ -1,0 +1,14 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.115.14",
+    "httpx>=0.28.1",
+    "pydantic-ai>=0.3.5",
+    "pydantic-settings>=2.10.1",
+    "python-dotenv>=1.1.1",
+    "redis>=6.2.0",
+]
