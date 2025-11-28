@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+</head>
+<body>
+    {% for item in items %}
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.description }}</p>
+        {% if item.details.all %}
+            <ul>
+                {% for detail in item.details.all %}
+                    <li>{{ detail.detail }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No details available.</p>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
