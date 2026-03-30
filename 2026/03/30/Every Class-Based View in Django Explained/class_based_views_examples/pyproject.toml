@@ -1,0 +1,7 @@
+[project]
+name = "class-based-views-examples"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "django>=6.0.3",
+]
