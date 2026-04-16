@@ -1,0 +1,66 @@
+{% extends 'user_profile/base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-lg-offset-0">
+
+            <div class="logo">
+                <div>
+                    <a href="{% url 'index' %}">Forum</a>
+                    <span class="tagline">...cool community forum</span>
+                </div>
+            </div>
+            <div class="menu">
+                <a href="{% url 'index' %}" class="m-item">Home</a> |
+                <a href="{% url 'profile' %}" class="m-item">Profile</a> |
+                <a href="{% url 'logout' %}" class="m-item">Logout</a>
+            </div>
+
+            <!-- display the page title and the number of threads we got from the database -->
+            <div class="pageTitle">My Profile</div>
+
+            <div class="row pad">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">My Info</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Email:
+                                <strong class="pull-right">{{ user.email }}</strong>
+                            </li>
+                            <li class="list-group-item">
+                                Username:
+                                <strong class="pull-right">{{ user.username }}</strong>
+                            </li>
+                            <li class="list-group-item">
+                                Num of Posts: 
+                                <strong class="pull-right">{{ user.reply_set.count }}</strong>
+                            </li>
+                            <li class="list-group-item">
+                                Join Date:
+                                <strong class="pull-right">{{ user.date_joined|date:"F j, Y" }}</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="center">
+                        Copyright &copy; 2017 Forum. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+</div>
+{% endblock %}

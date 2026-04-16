@@ -1,0 +1,10 @@
+[project]
+name = "community"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "django>=6.0.3",
+    "django-mcp-server>=0.5.7",
+    "django-oauth-toolkit>=3.2.0",
+    "django-oauth-toolkit-dcr>=0.1.0",
+]
