@@ -1,0 +1,8 @@
+[project]
+name = "pydantic-ai-demo"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "logfire>=4.32.1",
+    "pydantic-ai>=1.93.0",
+]
