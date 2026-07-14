@@ -1,0 +1,16 @@
+[project]
+name = "pydantic-ai-pdfs"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "arize-phoenix>=17.25.0",
+    "arize-phoenix-client>=2.12.0",
+    "arize-phoenix-otel>=0.16.1",
+    "flask>=3.1.3",
+    "httpx>=0.28.1",
+    "openinference-instrumentation-pydantic-ai>=0.1.17",
+    "opentelemetry-api>=1.42.1",
+    "opentelemetry-exporter-otlp>=1.42.1",
+    "opentelemetry-sdk>=1.42.1",
+    "pydantic-ai>=2.9.0",
+]

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap;">
+  {% for key, label in [('all', 'All'), ('unreviewed', 'Unreviewed'), ('correct', 'Correct'), ('incorrect', 'Incorrect')] %}
+    <a class="btn" href="{{ url_for('index', filter=key) }}"
+       {% if filter_by == key %}style="border-color: var(--accent); color: var(--accent); font-weight:600;"{% endif %}>
+      {{ label }} ({{ counts[key] }})
+    </a>
+  {% endfor %}
+</div>
+
+{% if not runs %}
+  <div class="card muted">No runs found{% if filter_by != 'all' %} for this filter{% endif %}.
+  Runs appear here after script.py sends a PDF to the LLM with Phoenix tracing enabled.</div>
+{% else %}
+<div class="card" style="padding:0; overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>When</th>
+        <th>Model</th>
+        <th>Status</th>
+        <th class="num">Transactions</th>
+        <th class="num">PDF</th>
+        <th class="num">Tokens (in / out)</th>
+        <th class="num">Cost</th>
+        <th>Balance check</th>
+        <th>Feedback</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for run in runs %}
+      <tr>
+        <td class="mono">{{ run.start_time[:19].replace('T', ' ') }}</td>
+        <td>{{ run.model }}</td>
+        <td><span class="badge {{ 'ok' if run.status_code == 'OK' else 'error' }}">{{ run.status_code }}</span></td>
+        <td class="num">{{ run.output.transactions | length if run.output and run.output.transactions is defined else '—' }}</td>
+        <td class="num">{{ run.pdf_size_kb }} KB</td>
+        <td class="num">{{ "{:,}".format(run.tokens_prompt or 0) }} / {{ "{:,}".format(run.tokens_completion or 0) }}</td>
+        <td class="num">{% if run.cost %}${{ "%.4f" | format(run.cost) }}{% else %}—{% endif %}</td>
+        <td>
+          {% if run.reconciliation %}
+            <span class="badge {{ 'ok' if run.reconciliation.matches else 'error' }}">
+              {{ '✓ balances' if run.reconciliation.matches else '✗ mismatch' }}
+            </span>
+          {% else %}<span class="muted">—</span>{% endif %}
+        </td>
+        <td>
+          {% if run.feedback %}
+            <span class="badge {{ run.feedback.label }}">{{ run.feedback.label }}</span>
+          {% else %}
+            <span class="badge unreviewed">unreviewed</span>
+          {% endif %}
+        </td>
+        <td><a href="{{ url_for('run_detail', span_id=run.span_id) }}">Review →</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{% endblock %}

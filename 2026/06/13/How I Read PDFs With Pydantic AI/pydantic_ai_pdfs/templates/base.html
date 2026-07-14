@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}AI Run Evaluation{% endblock %}</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --border: #e3e6ea; --text: #1f2937;
+    --muted: #6b7280; --accent: #2563eb; --green: #16a34a; --red: #dc2626;
+    --green-bg: #ecfdf5; --red-bg: #fef2f2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    padding: 0.8rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+  }
+  header h1 { font-size: 1.05rem; margin: 0; }
+  header h1 a { color: var(--text); text-decoration: none; }
+  header .sub { color: var(--muted); font-size: 0.85rem; }
+  main { max-width: 1400px; margin: 0 auto; padding: 1.25rem 1.5rem; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1rem;
+  }
+  .badge {
+    display: inline-block; padding: 0.1rem 0.6rem; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600;
+  }
+  .badge.correct { background: var(--green-bg); color: var(--green); }
+  .badge.incorrect { background: var(--red-bg); color: var(--red); }
+  .badge.unreviewed { background: #eef2ff; color: #4f46e5; }
+  .badge.ok { background: var(--green-bg); color: var(--green); }
+  .badge.error { background: var(--red-bg); color: var(--red); }
+  .muted { color: var(--muted); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; }
+  a { color: var(--accent); }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 0.45rem 0.7rem; border-bottom: 1px solid var(--border); }
+  th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .flash { padding: 0.6rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-weight: 500; }
+  .flash.success { background: var(--green-bg); color: var(--green); }
+  .flash.error { background: var(--red-bg); color: var(--red); }
+  button, .btn {
+    font: inherit; border-radius: 8px; padding: 0.45rem 1rem; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--text);
+    text-decoration: none; display: inline-block;
+  }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.correct { background: var(--green); border-color: var(--green); color: #fff; }
+  button.incorrect { background: var(--red); border-color: var(--red); color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <h1><a href="{{ url_for('index') }}">📄 AI Run Evaluation</a></h1>
+  <span class="sub">bank statement extraction &middot; Phoenix traces</span>
+</header>
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

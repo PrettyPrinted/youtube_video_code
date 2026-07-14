@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}Run {{ run.span_id }} — AI Run Evaluation{% endblock %}
+{% block content %}
+
+<div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem; flex-wrap:wrap;">
+  <a class="btn" href="{{ url_for('index') }}">← All runs</a>
+  <div>
+    <strong>{{ run.model }}</strong>
+    <span class="muted">&middot; {{ run.start_time[:19].replace('T', ' ') }}</span>
+    <span class="muted mono">&middot; span {{ run.span_id }}</span>
+  </div>
+  <div style="margin-left:auto; display:flex; gap:0.5rem;">
+    {% if prev_run %}<a class="btn" href="{{ url_for('run_detail', span_id=prev_run) }}">← Newer</a>{% endif %}
+    {% if next_run %}<a class="btn" href="{{ url_for('run_detail', span_id=next_run) }}">Older →</a>{% endif %}
+  </div>
+</div>
+
+<div style="display:grid; grid-template-columns: minmax(380px, 1fr) minmax(420px, 1fr); gap:1rem; align-items:start;">
+
+  <!-- Left: the PDF sent to the LLM -->
+  <div class="card" style="padding:0.6rem; position:sticky; top:1rem;">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:0.2rem 0.5rem 0.6rem;">
+      <strong>Original PDF</strong>
+      <span class="muted">{{ run.pdf_size_kb }} KB &middot;
+        <a href="{{ url_for('run_pdf', span_id=run.span_id) }}" target="_blank">open in new tab</a></span>
+    </div>
+    <iframe src="{{ url_for('run_pdf', span_id=run.span_id) }}"
+            style="width:100%; height:78vh; border:1px solid var(--border); border-radius:8px;"></iframe>
+  </div>
+
+  <!-- Right: prompt, results, feedback -->
+  <div>
+
+    <div class="card">
+      <strong>Feedback</strong>
+      {% if run.feedback %}
+        <div style="margin:0.5rem 0;">
+          Current: <span class="badge {{ run.feedback.label }}">{{ run.feedback.label }}</span>
+          <span class="muted">saved {{ run.feedback.updated_at[:19].replace('T', ' ') }}</span>
+          {% if run.feedback.explanation %}
+            <div class="muted" style="margin-top:0.3rem;">“{{ run.feedback.explanation }}”</div>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="muted" style="margin:0.4rem 0;">Not reviewed yet.</div>
+      {% endif %}
+      <form method="post" action="{{ url_for('run_feedback', span_id=run.span_id) }}">
+        <textarea name="notes" rows="2" placeholder="Optional notes (what was wrong / right?)"
+                  style="width:100%; font:inherit; padding:0.5rem; border:1px solid var(--border); border-radius:8px; resize:vertical;">{{ run.feedback.explanation if run.feedback else '' }}</textarea>
+        {% if next_run %}<input type="hidden" name="next_run" value="{{ next_run }}">{% endif %}
+        <div style="display:flex; gap:0.5rem; margin-top:0.5rem; flex-wrap:wrap;">
+          <button class="correct" name="label" value="correct">✓ Correct</button>
+          <button class="incorrect" name="label" value="incorrect">✗ Incorrect</button>
+          {% if next_run %}
+            <button class="correct" name="label" value="correct" style="margin-left:auto;"
+                    onclick="this.form.next.value='1'">✓ Correct &amp; next</button>
+            <input type="hidden" name="next" value="">
+          {% endif %}
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <strong>Prompt</strong>
+      {% for role, text in run.prompt %}
+        <div style="margin-top:0.5rem;">
+          <span class="badge unreviewed">{{ role }}</span>
+          <div class="mono" style="white-space:pre-wrap; margin-top:0.3rem;">{{ text }}</div>
+        </div>
+      {% endfor %}
+      <div class="muted" style="margin-top:0.5rem; font-size:0.85rem;">
+        + attached PDF ({{ run.pdf_size_kb }} KB) &middot;
+        tokens {{ "{:,}".format(run.tokens_prompt or 0) }} in / {{ "{:,}".format(run.tokens_completion or 0) }} out
+        {% if run.cost %} &middot; ${{ "%.4f" | format(run.cost) }}{% endif %}
+      </div>
+    </div>
+
+    <div class="card">
+      <strong>Result</strong>
+      {% if run.status_code != 'OK' %}
+        <div class="flash error" style="margin-top:0.5rem;">
+          Run status {{ run.status_code }}{% if run.status_message %}: {{ run.status_message }}{% endif %}
+        </div>
+      {% endif %}
+
+      {% if run.output is mapping %}
+        <div style="display:flex; gap:1.5rem; flex-wrap:wrap; margin:0.7rem 0;">
+          {% for key, value in run.output.items() if key != 'transactions' %}
+            <div>
+              <div class="muted" style="font-size:0.78rem; text-transform:uppercase; letter-spacing:0.04em;">{{ key.replace('_', ' ') }}</div>
+              <div style="font-weight:600;">
+                {% if value is number and 'balance' in key %}${{ "%.2f" | format(value) }}{% else %}{{ value }}{% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if run.reconciliation %}
+          <div class="flash {{ 'success' if run.reconciliation.matches else 'error' }}" style="margin:0.5rem 0;">
+            Balance check: beginning + transactions = ${{ "%.2f" | format(run.reconciliation.expected_balance) }}
+            {{ '=' if run.reconciliation.matches else '≠' }}
+            current ${{ "%.2f" | format(run.output.current_balance) }}
+            ({{ 'reconciles' if run.reconciliation.matches else 'MISMATCH' }})
+          </div>
+        {% endif %}
+
+        {% if run.output.transactions is defined %}
+          <div style="overflow-x:auto; max-height:50vh; overflow-y:auto;">
+            <table>
+              <thead><tr><th>#</th><th>Date</th><th>Description</th><th class="num">Amount</th></tr></thead>
+              <tbody>
+                {% for t in run.output.transactions %}
+                <tr>
+                  <td class="muted">{{ loop.index }}</td>
+                  <td class="mono">{{ t.transaction_date }}</td>
+                  <td>{{ t.description }}</td>
+                  <td class="num" style="color: {{ 'var(--red)' if t.amount < 0 else 'var(--green)' }};">
+                    {{ "%.2f" | format(t.amount) }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+      {% endif %}
+
+      <details style="margin-top:0.8rem;">
+        <summary class="muted" style="cursor:pointer;">Raw JSON output</summary>
+        <pre class="mono" style="white-space:pre-wrap; background:var(--bg); padding:0.8rem; border-radius:8px; overflow-x:auto;">{{ run.output | tojson(indent=2) if run.output else run.output_raw }}</pre>
+      </details>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
