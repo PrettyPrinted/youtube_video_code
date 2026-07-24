@@ -1,0 +1,9 @@
+[project]
+name = "meetings-bot"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "pyannote-audio>=4.0.4",
+    "pydantic-ai>=1.103.0",
+    "python-dotenv>=1.2.2",
+]
