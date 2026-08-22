@@ -1,0 +1,8 @@
+[project]
+name = "pydantic-ai-harness-demo"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic-ai-harness>=0.24.0",
+    "pydantic-ai[openai]>=2.33.0",
+]
