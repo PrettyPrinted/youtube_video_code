@@ -1,0 +1,27 @@
+{
+    "hooks": {
+        "UserPromptSubmit": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 ~/hooks_example/.codex/hooks/user_prompt_submit.py",
+                        "statusMessage": "Checking user prompt..."
+                    }
+                ]
+            }
+        ],
+        "PreToolUse": [
+            {
+                "matcher": "*",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 ~/hooks_example/.codex/hooks/pre_tool_use.py",
+                        "statusMessage": "Checking tool use..."
+                    }
+                ]                
+            }
+        ]
+    }
+}
