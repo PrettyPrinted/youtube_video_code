@@ -1,0 +1,8 @@
+[project]
+name = "pydantic-mcp"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "py-key-value-aio[disk]>=0.4.6",
+    "pydantic-ai[slim]>=2.61.0",
+]
