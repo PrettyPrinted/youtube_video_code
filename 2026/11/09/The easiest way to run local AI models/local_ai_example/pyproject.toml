@@ -1,0 +1,7 @@
+[project]
+name = "local-ai-example"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic-ai-slim[openai]>=2.66.0",
+]
